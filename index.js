@@ -1,4 +1,4 @@
-class Room {
+export class Room {
     constructor(name, bookings, rate, discount) {
         this.name = name;
         this.bookings = bookings;
@@ -23,7 +23,7 @@ class Room {
     }
 }
 
-class Booking {
+export class Booking {
     constructor(name, email, checkIn, checkOut, discount, room) {
         this.name = name;
         this.email = email;
