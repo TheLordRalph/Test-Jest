@@ -28,11 +28,19 @@ export class Room {
     }
 
     static totalOccupancyPercentage(rooms, startDate, endDate) {
-
+        let totalOccupancy = 0;
+        rooms.map(room => (
+            totalOccupancy += room.occupancyPercentage(startDate, endDate)
+        ))
+        return (totalOccupancy / (rooms.length * 100)) * 100;
     }
 
     static availableRooms(rooms, startDate, endDate) {
-
+        let roomsAvailable = [];
+        rooms.map(room => (
+            room.occupancyPercentage(startDate, endDate) === 0 ? roomsAvailable.push(room) : null
+        ))
+        return roomsAvailable;
     }
 }
 
@@ -43,10 +51,11 @@ export class Booking {
         this.checkIn = checkIn;
         this.checkOut = checkOut;
         this.discount = discount;
-        this.room= room;
+        this.room = room;
     }
 
     getFee() {
-
+        let rateRoom = this.room.rate - (this.room.rate * this.room.discount) / 100;
+        return rateRoom - (rateRoom * this.discount) / 100;
     }
 }

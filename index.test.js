@@ -17,13 +17,13 @@ test('Room percentage of occupancy', function() {
 });
 
 test('Total room percentage of occupancy', function() {
-    expect(newRoom.totalOccupancyPercentage([newRoom], '2022-02-03', '2022-02-06')).toBe(100);
+    expect(Room.totalOccupancyPercentage([newRoom], new Date('2022-02-03'), new Date('2022-02-12'))).toBe(40);
 });
 
 test('Rooms avaliables in especific date', function() {
-    expect(newRoom.availableRooms([newRoom], '2022-02-03', '2022-02-06')).not.toBe([]);
+    expect(Room.availableRooms([newRoom], new Date('2022-01-03'), new Date('2022-01-06'))).toStrictEqual([newRoom]);
 });
 
 test('Get fee of bookings', function() {
-    expect(newBooking.getFee()).toBe(100);
+    expect(newBooking.getFee()).toBe(88.72);
 });
