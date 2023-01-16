@@ -1,12 +1,19 @@
 export class Room {
-    constructor(name, bookings, rate, discount) {
+
+    name: string;
+    bookings: Booking[];
+    rate: number;
+    discount: number;
+
+    constructor(name: string, bookings: Booking[], rate: number, discount: number) {
         this.name = name;
         this.bookings = bookings;
         this.rate = rate;
         this.discount = discount;
     }
 
-    isOccupied(date) {
+
+    isOccupied(date: Date) {
         for (let i = 0; i < this.bookings.length; i++) {
             if (date >= this.bookings[i].checkIn && date <= this.bookings[i].checkOut) {
                 return true;
@@ -15,7 +22,7 @@ export class Room {
         return false;
     }
 
-    occupancyPercentage(startDate, endDate) {
+    occupancyPercentage(startDate: Date, endDate: Date) {
         const numeroDeDiasSeleccionados = (endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24);
         let date = new Date(startDate);
         let countDays = 0;
@@ -27,7 +34,7 @@ export class Room {
         return (countDays * 100) / (numeroDeDiasSeleccionados + 1);
     }
 
-    static totalOccupancyPercentage(rooms, startDate, endDate) {
+    static totalOccupancyPercentage(rooms: Room[], startDate: Date, endDate: Date) {
         let totalOccupancy = 0;
         rooms.map(room => (
             totalOccupancy += room.occupancyPercentage(startDate, endDate)
@@ -35,8 +42,8 @@ export class Room {
         return (totalOccupancy / (rooms.length * 100)) * 100;
     }
 
-    static availableRooms(rooms, startDate, endDate) {
-        let roomsAvailable = [];
+    static availableRooms(rooms: Room[], startDate: Date, endDate: Date) {
+        let roomsAvailable: Room[] = [];
         rooms.map(room => (
             room.occupancyPercentage(startDate, endDate) === 0 ? roomsAvailable.push(room) : null
         ))
@@ -45,7 +52,15 @@ export class Room {
 }
 
 export class Booking {
-    constructor(name, email, checkIn, checkOut, discount, room) {
+
+    name: string;
+    email: string;
+    checkIn: Date;
+    checkOut: Date;
+    discount: number;
+    room: Room;
+
+    constructor(name: string, email: string, checkIn: Date, checkOut: Date, discount: number, room: Room) {
         this.name = name;
         this.email = email;
         this.checkIn = checkIn;

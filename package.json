@@ -19,12 +19,13 @@
   "homepage": "https://github.com/TheLordRalph/Test-Jest#readme",
   "devDependencies": {
     "@babel/preset-env": "^7.20.2",
+    "@types/jest": "^29.2.5",
     "babel-jest": "^29.3.1",
     "jest": "^29.3.1"
   },
   "jest": {
     "transform": {
-      "^.+\\.[t|j]sx?$": "babel-jest"
+      "^.+\\.(t|j)sx?$": "ts-jest"
     }
   }
 }
